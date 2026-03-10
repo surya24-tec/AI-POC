@@ -1,0 +1,16 @@
+<div class="result-container">
+    <div class="glass-card result-card">
+        <div class="icon-success">✔</div>
+        <h1>Interview Completed</h1>
+        <h3>Well done, {{ username }}!</h3>
+
+        <div class="feedback-section">
+            <h4>AI Feedback & Score</h4>
+            <p class="feedback-text">{{ feedback }}</p>
+        </div>
+
+        <div class="actions">
+            <button class="primary-btn" (click)="goHome()">New Session</button>
+        </div>
+    </div>
+</div>

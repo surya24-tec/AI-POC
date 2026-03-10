@@ -1,0 +1,17 @@
+com\ai\interview\model\ConversationSession$SessionStatus.class
+com\ai\interview\model\ConversationSession.class
+com\ai\interview\dto\AiEvaluationRequest.class
+com\ai\interview\controller\AdminController.class
+com\ai\interview\repository\UserRepository.class
+com\ai\interview\service\InterviewService.class
+com\ai\interview\AiInterviewerApplication.class
+com\ai\interview\repository\ConversationSessionRepository.class
+com\ai\interview\repository\AnswerRepository.class
+com\ai\interview\repository\QuestionRepository.class
+com\ai\interview\service\InterviewPromptService.class
+com\ai\interview\model\User.class
+com\ai\interview\controller\InterviewController.class
+com\ai\interview\model\Answer.class
+com\ai\interview\DataInitializer.class
+com\ai\interview\service\GeminiService.class
+com\ai\interview\model\Question.class

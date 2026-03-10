@@ -1,0 +1,469 @@
+.minimal-home {
+    height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: #ffffff;
+    color: #1a1a1b;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+}
+
+.content {
+    width: 100%;
+    max-width: 650px;
+    text-align: center;
+    padding: 20px;
+}
+
+h1 {
+    font-size: 32px;
+    font-weight: 500;
+    margin-bottom: 40px;
+    letter-spacing: -0.5px;
+}
+
+.search-container {
+    position: relative;
+    margin-bottom: 20px;
+}
+
+.search-inner {
+    display: flex;
+    align-items: center;
+    background: #f3f4f6;
+    border-radius: 100px;
+    padding: 8px 16px;
+    border: 1px solid transparent;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    min-height: 58px;
+}
+
+.search-inner:focus-within {
+    background: #ffffff;
+    border-color: #e5e7eb;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05);
+}
+
+/* Recording active state */
+.search-inner.recording-active {
+    background: #fff8f8;
+    border-color: #fca5a5;
+    box-shadow: 0 0 0 3px rgba(239, 68, 68, 0.08);
+}
+
+.plus-icon {
+    color: #6b7280;
+    font-size: 20px;
+    margin-right: 12px;
+    cursor: pointer;
+}
+
+.minimal-input {
+    flex: 1;
+    background: transparent;
+    border: none;
+    outline: none;
+    padding: 12px 0;
+    font-size: 16px;
+    color: #1a1a1b;
+}
+
+.minimal-input::placeholder {
+    color: #9ca3af;
+}
+
+.icons {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+/* Mic button (replaces emoji) */
+.mic-btn {
+    background: transparent;
+    border: none;
+    color: #6b7280;
+    cursor: pointer;
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.2s ease;
+}
+
+.mic-btn:hover {
+    background: #e5e7eb;
+    color: #111827;
+}
+
+.go-btn {
+    background: #000000;
+    color: white;
+    border: none;
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: transform 0.2s;
+    flex-shrink: 0;
+}
+
+.go-btn:hover:not(:disabled) {
+    transform: scale(1.1);
+}
+
+.go-btn:disabled {
+    background: #e5e7eb;
+    cursor: not-allowed;
+}
+
+.arrow {
+    font-size: 18px;
+    line-height: 1;
+}
+
+/* ========================
+   WAVEFORM RECORDING UI
+   ======================== */
+.waveform-container {
+    flex: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 3px;
+    padding: 0 12px;
+    height: 40px;
+    overflow: hidden;
+}
+
+.waveform-bar {
+    width: 3px;
+    border-radius: 999px;
+    background: #ef4444;
+    min-height: 6px;
+    transition: height 0.08s ease, opacity 0.08s ease;
+}
+
+/* Cancel button (X) */
+.voice-cancel-btn {
+    background: transparent;
+    border: none;
+    color: #6b7280;
+    cursor: pointer;
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.2s ease;
+    flex-shrink: 0;
+}
+
+.voice-cancel-btn:hover {
+    background: #fee2e2;
+    color: #ef4444;
+}
+
+/* Confirm button (check) */
+.voice-confirm-btn {
+    background: #000000;
+    border: none;
+    color: #ffffff;
+    cursor: pointer;
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.2s ease;
+    flex-shrink: 0;
+}
+
+.voice-confirm-btn:hover {
+    background: #18181b;
+    transform: scale(1.08);
+}
+
+/* Transcript live preview */
+.transcript-preview {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin-top: 12px;
+    font-size: 14px;
+    color: #1a1a1b;
+    font-weight: 500;
+    animation: fadeIn 0.3s ease;
+    justify-content: center;
+}
+
+.transcript-preview.listening {
+    color: #9ca3af;
+}
+
+.pulse-dot {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background: #ef4444;
+    animation: pulse 1.2s ease-in-out infinite;
+    flex-shrink: 0;
+}
+
+@keyframes pulse {
+
+    0%,
+    100% {
+        transform: scale(1);
+        opacity: 1;
+    }
+
+    50% {
+        transform: scale(1.4);
+        opacity: 0.5;
+    }
+}
+
+/* ========================
+   OPTIONS & CATEGORY
+   ======================== */
+.options-container {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    gap: 16px;
+    margin: 20px 0 40px;
+    position: relative;
+}
+
+.option-card {
+    flex: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: #ffffff;
+    padding: 14px 24px;
+    border: 1px solid #e5e7eb;
+    border-radius: 50px;
+    /* Pill shape like the image */
+    transition: all 0.2s ease;
+    cursor: pointer;
+    min-height: 52px;
+}
+
+.option-card:hover {
+    border-color: #d1d5db;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.03);
+    background: #fafafa;
+}
+
+.option-card.active-option {
+    border-color: #1a1a1b;
+    /* Black border for active state */
+    background: #fdfdfd;
+}
+
+/* Hide checkbox elements completely for these cards */
+.option-card .checkbox-item {
+    pointer-events: none;
+    margin: 0;
+}
+
+.option-card .checkbox-item input[type="checkbox"],
+.option-card .checkmark {
+    display: none;
+}
+
+.option-card .checkbox-label {
+    font-size: 16px;
+    font-weight: 500;
+    color: #6b7280;
+    pointer-events: none;
+    transition: color 0.2s;
+    text-align: center;
+    width: 100%;
+}
+
+.option-card.active-option .checkbox-label {
+    color: #1a1a1b;
+    /* Black text */
+    font-weight: 600;
+}
+
+
+
+.category-desc {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    right: 0;
+    margin: 16px 0 0 0;
+    font-size: 13.5px;
+    color: #6b7280;
+    line-height: 1.6;
+    animation: fadeIn 0.3s ease;
+    text-align: center;
+}
+
+.hint-text {
+    color: #9ca3af;
+    font-size: 14px;
+    margin-top: 10px;
+}
+
+.hint-text strong {
+    color: #6b7280;
+}
+
+/* Animations */
+.fade-in {
+    animation: fadeIn 0.8s ease-out;
+}
+
+.fade-in-delayed {
+    animation: fadeIn 1.2s ease-out;
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(10px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* ========================
+   SCORE CARD
+   ======================== */
+.score-card {
+    margin-top: 16px;
+    background: #ffffff;
+    border-radius: 16px;
+    border: 1px solid #e5e7eb;
+    padding: 20px;
+    box-shadow: 0 8px 30px rgba(0, 0, 0, 0.04);
+    position: absolute;
+    top: 100%;
+    left: 0;
+    right: 0;
+    z-index: 10;
+}
+
+
+
+.score-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+    border-bottom: 1px solid #f3f4f6;
+    padding-bottom: 12px;
+}
+
+.score-header h3 {
+    margin: 0;
+    font-size: 16px;
+    font-weight: 600;
+    color: #1a1a1b;
+}
+
+.cat-badge {
+    background: #1a1a1b;
+    color: #ffffff;
+    padding: 4px 10px;
+    border-radius: 20px;
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 0.5px;
+    text-transform: uppercase;
+}
+
+.score-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 16px;
+    margin-bottom: 20px;
+}
+
+.score-stat {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    background: #fdfdfd;
+    border: 1px solid #f3f4f6;
+    border-radius: 12px;
+    padding: 16px;
+    transition: transform 0.2s ease;
+}
+
+.score-stat:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.02);
+}
+
+.stat-num {
+    font-size: 32px;
+    font-weight: 700;
+    color: #1a1a1b;
+    line-height: 1;
+    margin-bottom: 6px;
+}
+
+.stat-lbl {
+    font-size: 13px;
+    font-weight: 500;
+    color: #6b7280;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+.score-feedback {
+    background: #fafafa;
+    border-radius: 12px;
+    padding: 14px;
+    margin-bottom: 16px;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+.feedback-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 10px;
+}
+
+.fb-icon {
+    font-size: 18px;
+    line-height: 1.4;
+}
+
+.fb-text {
+    font-size: 13.5px;
+    color: #374151;
+    line-height: 1.5;
+    margin: 0;
+}
+
+.score-footer {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    gap: 6px;
+    color: #9ca3af;
+    font-size: 12px;
+    font-weight: 500;
+}

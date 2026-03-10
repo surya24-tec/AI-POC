@@ -1,0 +1,47 @@
+<div class="admin-container">
+    <div class="admin-card">
+        <h2>Question Management</h2>
+
+        <div class="add-section">
+            <h3>Add New Question</h3>
+            <div class="form-group">
+                <textarea [(ngModel)]="newQuestion.content" placeholder="Question text..."></textarea>
+                <div class="row">
+                    <select [(ngModel)]="newQuestion.category">
+                        <option>Communication</option>
+                        <option>Situational</option>
+                        <option>Experience</option>
+                        <option>Personality</option>
+                    </select>
+                    <button (click)="saveQuestion()" class="primary-btn">Save Question</button>
+                </div>
+            </div>
+        </div>
+
+        <hr>
+
+        <div class="list-section">
+            <h3>Existing Questions</h3>
+            <table>
+                <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>Question</th>
+                        <th>Category</th>
+                        <th>Actions</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr *ngFor="let q of questions">
+                        <td>{{ q.id }}</td>
+                        <td class="text-left">{{ q.content }}</td>
+                        <td>{{ q.category }}</td>
+                        <td>
+                            <button (click)="deleteQuestion(q.id)" class="delete-btn">Delete</button>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
