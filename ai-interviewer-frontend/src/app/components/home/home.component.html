@@ -83,15 +83,15 @@
       </div>
 
       <!-- Score Tab/Option -->
-      <div class="option-card" [class.active-option]="showScore"
-        (click)="showScore = !showScore; showCommunicationDesc = false">
+      <div class="option-card" [class.active-option]="showScore" #scoreContainer
+        (click)="toggleScore()">
         <label class="checkbox-item" (click)="$event.preventDefault()">
           <input type="checkbox" [checked]="showScore">
           <span class="checkmark"></span>
           <span class="checkbox-label">Your Score</span>
         </label>
 
-        <div class="score-card fade-in" *ngIf="showScore">
+        <div class="score-card fade-in" *ngIf="showScore" (click)="$event.stopPropagation()">
           <div class="score-header">
             <h3>Recent Performance</h3>
             <span class="cat-badge">{{ testCategory }}</span>

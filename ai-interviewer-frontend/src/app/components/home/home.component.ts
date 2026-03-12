@@ -1,4 +1,4 @@
-import { Component, OnInit, OnDestroy, ChangeDetectorRef } from '@angular/core';
+import { Component, OnInit, OnDestroy, ChangeDetectorRef, ElementRef, HostListener, ViewChild } from '@angular/core';
 import { Router } from '@angular/router';
 import { FormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
@@ -14,6 +14,26 @@ import { InterviewService } from '../../services/interview.service';
 export class HomeComponent implements OnInit, OnDestroy {
     username: string = '';
     showCommunicationDesc: boolean = false;
+    @ViewChild('scoreContainer') scoreContainer!: ElementRef;
+
+    @HostListener('document:click', ['$event'])
+    onDocumentClick(event: MouseEvent) {
+        if (this.showScore && this.scoreContainer) {
+            if (!this.scoreContainer.nativeElement.contains(event.target)) {
+                this.showScore = false;
+                this.cdr.detectChanges();
+            }
+        }
+    }
+
+    toggleScore() {
+        if (!this.showScore) {
+            this.showScore = true;
+            this.showCommunicationDesc = false;
+        } else {
+            this.showScore = false;
+        }
+    }
 
     // Score properties
     showScore: boolean = false;
