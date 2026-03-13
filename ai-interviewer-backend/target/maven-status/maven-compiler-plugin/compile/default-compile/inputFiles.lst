@@ -1,16 +1,16 @@
-D:\kayal\ai-interviewer-backend\src\main\java\com\ai\interview\repository\UserRepository.java
-D:\kayal\ai-interviewer-backend\src\main\java\com\ai\interview\model\User.java
-D:\kayal\ai-interviewer-backend\src\main\java\com\ai\interview\service\InterviewService.java
-D:\kayal\ai-interviewer-backend\src\main\java\com\ai\interview\service\GeminiService.java
-D:\kayal\ai-interviewer-backend\src\main\java\com\ai\interview\model\ConversationSession.java
-D:\kayal\ai-interviewer-backend\src\main\java\com\ai\interview\dto\AiEvaluationRequest.java
-D:\kayal\ai-interviewer-backend\src\main\java\com\ai\interview\service\InterviewPromptService.java
-D:\kayal\ai-interviewer-backend\src\main\java\com\ai\interview\controller\InterviewController.java
-D:\kayal\ai-interviewer-backend\src\main\java\com\ai\interview\controller\AdminController.java
-D:\kayal\ai-interviewer-backend\src\main\java\com\ai\interview\repository\ConversationSessionRepository.java
-D:\kayal\ai-interviewer-backend\src\main\java\com\ai\interview\model\Answer.java
-D:\kayal\ai-interviewer-backend\src\main\java\com\ai\interview\repository\QuestionRepository.java
-D:\kayal\ai-interviewer-backend\src\main\java\com\ai\interview\model\Question.java
-D:\kayal\ai-interviewer-backend\src\main\java\com\ai\interview\AiInterviewerApplication.java
-D:\kayal\ai-interviewer-backend\src\main\java\com\ai\interview\DataInitializer.java
-D:\kayal\ai-interviewer-backend\src\main\java\com\ai\interview\repository\AnswerRepository.java
+D:\New folder\AI-POC\ai-interviewer-backend\src\main\java\com\ai\interview\model\User.java
+D:\New folder\AI-POC\ai-interviewer-backend\src\main\java\com\ai\interview\model\ConversationSession.java
+D:\New folder\AI-POC\ai-interviewer-backend\src\main\java\com\ai\interview\DataInitializer.java
+D:\New folder\AI-POC\ai-interviewer-backend\src\main\java\com\ai\interview\service\InterviewService.java
+D:\New folder\AI-POC\ai-interviewer-backend\src\main\java\com\ai\interview\service\InterviewPromptService.java
+D:\New folder\AI-POC\ai-interviewer-backend\src\main\java\com\ai\interview\AiInterviewerApplication.java
+D:\New folder\AI-POC\ai-interviewer-backend\src\main\java\com\ai\interview\controller\AdminController.java
+D:\New folder\AI-POC\ai-interviewer-backend\src\main\java\com\ai\interview\repository\QuestionRepository.java
+D:\New folder\AI-POC\ai-interviewer-backend\src\main\java\com\ai\interview\repository\UserRepository.java
+D:\New folder\AI-POC\ai-interviewer-backend\src\main\java\com\ai\interview\service\GeminiService.java
+D:\New folder\AI-POC\ai-interviewer-backend\src\main\java\com\ai\interview\model\Question.java
+D:\New folder\AI-POC\ai-interviewer-backend\src\main\java\com\ai\interview\controller\InterviewController.java
+D:\New folder\AI-POC\ai-interviewer-backend\src\main\java\com\ai\interview\dto\AiEvaluationRequest.java
+D:\New folder\AI-POC\ai-interviewer-backend\src\main\java\com\ai\interview\repository\AnswerRepository.java
+D:\New folder\AI-POC\ai-interviewer-backend\src\main\java\com\ai\interview\repository\ConversationSessionRepository.java
+D:\New folder\AI-POC\ai-interviewer-backend\src\main\java\com\ai\interview\model\Answer.java
