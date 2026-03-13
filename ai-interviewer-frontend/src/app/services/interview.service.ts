@@ -2,11 +2,13 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 
+import { environment } from '../../environments/environment';
+
 @Injectable({
     providedIn: 'root'
 })
 export class InterviewService {
-    private apiUrl = 'http://localhost:8081/api/interview';
+    private apiUrl = `${environment.apiUrl}/api/interview`;
 
     constructor(private http: HttpClient) { }
 
@@ -55,7 +57,7 @@ export class InterviewService {
      * Evaluates a single answer and gets feedback and improved answer
      */
     evaluateAnswer(question: string, answer: string): Observable<string> {
-        return this.http.post('http://localhost:8081/ai/evaluate', {
+        return this.http.post(`${environment.apiUrl}/ai/evaluate`, {
             question,
             answer
         }, { responseType: 'text' });
