@@ -10,6 +10,8 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import java.util.List;
 import java.util.Map;
+import java.util.concurrent.ConcurrentHashMap;
+import java.util.concurrent.atomic.AtomicInteger;
 
 @RestController
 @CrossOrigin(origins = "*")
@@ -24,7 +26,30 @@ public class InterviewController {
     @Autowired
     private InterviewPromptService promptService;
 
-    // Existing endpoints mapped manually to preserve functionality
+    // ── Per-session rate limiter: max 5 requests per minute per session ──────
+    private final ConcurrentHashMap<Long, long[]> sessionRateMap = new ConcurrentHashMap<>();
+    private static final int MAX_REQUESTS_PER_MINUTE = 5;
+
+    private boolean isRateLimited(Long sessionId) {
+        long now = System.currentTimeMillis();
+        sessionRateMap.putIfAbsent(sessionId, new long[]{0, now});
+        long[] data = sessionRateMap.get(sessionId);
+
+        // Reset window every 60 seconds
+        if (now - data[1] > 60_000) {
+            data[0] = 0;
+            data[1] = now;
+        }
+
+        if (data[0] >= MAX_REQUESTS_PER_MINUTE) {
+            return true; // Rate limited
+        }
+        data[0]++;
+        return false;
+    }
+
+    // ── Endpoints ───────────────────────────────────────────────────────────
+
     @PostMapping("/api/interview/start")
     public ResponseEntity<ConversationSession> startInterview(@RequestParam String username) {
         System.out.println(">>> Backend: Starting session for user: " + username);
@@ -34,6 +59,15 @@ public class InterviewController {
     @GetMapping("/api/interview/next-question/{sessionId}")
     public ResponseEntity<Question> getNextQuestion(@PathVariable Long sessionId) {
         System.out.println(">>> Backend: Fetching question for session ID: " + sessionId);
+
+        if (isRateLimited(sessionId)) {
+            System.out.println(">>> Backend: Rate limited session " + sessionId);
+            Question rateMsg = new Question();
+            rateMsg.setContent("Please wait a moment before requesting the next question.");
+            rateMsg.setCategory("System");
+            return ResponseEntity.status(429).body(rateMsg);
+        }
+
         Question q = interviewService.getNextQuestion(sessionId);
 
         if (q == null || q.getContent() == null) {
@@ -51,6 +85,11 @@ public class InterviewController {
         Long questionId = Long.valueOf(payload.get("questionId").toString());
         String content = payload.get("content").toString();
 
+        if (isRateLimited(sessionId)) {
+            System.out.println(">>> Backend: Rate limited session " + sessionId);
+            return ResponseEntity.status(429).build();
+        }
+
         System.out.println(">>> Backend: Answer received for session " + sessionId);
         return ResponseEntity.ok(interviewService.submitAnswer(sessionId, questionId, content));
     }
@@ -65,7 +104,7 @@ public class InterviewController {
         return ResponseEntity.ok(interviewService.getFinalFeedback(sessionId));
     }
 
-    // New Endpoint for AI evaluation
+    // AI evaluation endpoint
     @PostMapping("/ai/evaluate")
     public ResponseEntity<String> evaluateAnswer(@RequestBody AiEvaluationRequest request) {
         try {
