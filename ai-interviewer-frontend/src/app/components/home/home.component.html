@@ -8,7 +8,7 @@
         <!-- Normal input view -->
         <ng-container *ngIf="!isRecording">
           <span class="plus-icon"></span>
-          <input type="text" [(ngModel)]="username" placeholder="You Can Start Now..." (keyup.enter)="start()"
+          <input type="text" [(ngModel)]="username" placeholder="Enter your E-mail..." (keyup.enter)="start()"
             class="minimal-input">
           <div class="icons">
             <button class="mic-btn" (click)="startVoice()" title="Speak your name">

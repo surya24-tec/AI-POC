@@ -117,6 +117,7 @@ public class GeminiService {
             } catch (org.springframework.web.client.HttpStatusCodeException e) {
                 System.err.println("Gemini HTTP Error (attempt " + attempt + "/" + maxRetries + "): "
                         + e.getStatusCode());
+                System.err.println("Gemini Error Body: " + e.getResponseBodyAsString());
                 if (e.getStatusCode().value() == 429 && attempt < maxRetries) {
                     System.out.println("Rate limited by API. Waiting 10 seconds before retry...");
                     try {
@@ -167,6 +168,9 @@ public class GeminiService {
             } catch (org.springframework.web.client.HttpStatusCodeException e) {
                 System.err.println("Gemini HTTP Error (attempt " + attempt + "/" + maxRetries + "): "
                         + e.getStatusCode());
+                System.err.println("Gemini API Key in use (last 4 chars): ..." + 
+                        (apiKey != null && apiKey.length() > 4 ? apiKey.trim().substring(apiKey.trim().length() - 4) : "N/A"));
+                System.err.println("Gemini Error Body: " + e.getResponseBodyAsString());
                 if (e.getStatusCode().value() == 429 && attempt < maxRetries) {
                     System.out.println("Rate limited by API. Waiting 10 seconds before retry...");
                     try {

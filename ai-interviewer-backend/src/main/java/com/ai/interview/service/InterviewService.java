@@ -33,12 +33,17 @@ public class InterviewService {
     @Autowired
     private GeminiService geminiService;
 
+    @Autowired
+    private EmailService emailService;
+
     public ConversationSession startSession(String username) {
+        java.util.concurrent.atomic.AtomicBoolean isNewUser = new java.util.concurrent.atomic.AtomicBoolean(false);
         User user = userRepository.findByUsername(username)
                 .orElseGet(() -> {
+                    isNewUser.set(true);
                     User newUser = new User();
                     newUser.setUsername(username);
-                    newUser.setEmail(username + "@example.com");
+                    newUser.setEmail(username.contains("@") ? username : username + "@example.com");
                     return userRepository.save(newUser);
                 });
 
@@ -47,7 +52,14 @@ public class InterviewService {
         session.setStartTime(LocalDateTime.now());
         session.setStatus(ConversationSession.SessionStatus.ACTIVE);
 
-        return sessionRepository.save(session);
+        ConversationSession savedSession = sessionRepository.save(session);
+
+        // Send Welcome email if the user used an email address
+        if (username.contains("@")) {
+            emailService.sendWelcomeEmail(username);
+        }
+
+        return savedSession;
     }
 
     // ── Hybrid Question Model ───────────────────────────────────────────────
